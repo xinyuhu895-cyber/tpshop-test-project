@@ -1,0 +1,420 @@
+<include file="public/layout" />
+<style>
+    dd.opt table{
+        width: 100%;
+    }
+    dd.opt tr{
+        border: 1px solid #f4f4f4;
+        padding: 8px;
+    }
+    dd.opt tr td{
+        border: 1px solid #f4f4f4;
+    }
+    /*#edui1_toolbarbox{*/
+        /*display: none;*/
+    /*}*/
+    .ys-btn-close {
+        position: relative;
+        top: -12px;
+        left: -16px;
+        width: 18px;
+        height: 18px;
+        border: 1px solid #ccc;
+        line-height: 18px;
+        text-align: center;
+        display: inline-block;
+        border-radius: 50%;
+        z-index: 1;
+        background-color: #fff;
+        cursor: pointer;
+    }
+    .selected-group-goods {
+        background-color: #FFF;
+        width: 162px;
+        padding: 9px;
+        margin-bottom: 10px;
+        border: solid 1px #E6E6E6;
+        box-shadow: 2px 2px 0 rgba(153,153,153,0.1);
+    }
+    .bsc-msg{
+        font-size: 16px;
+        color: #000000;
+        padding-left: 12px;
+        margin: 20px 0 0 15px;
+        border-left: 5px solid #158FFB;
+    }
+    .subject h3{
+        font-weight: bold;
+    }
+    .input-txt{
+        margin-right: 20px;
+    }
+    .h-prize{
+        margin-bottom: 20px;
+    }
+    .h-delete{
+        margin-left: 20px;
+        color: #158FFB;
+        cursor: pointer;
+    }
+    .add-prize{
+        color: #158FFB;
+        width: 100px;
+        border: 1px dashed #158FFB;
+        text-align: center;
+        border-radius: 3px;
+        height: 25px;
+        line-height: 25px;
+        cursor: pointer;
+    }
+    .row{
+        margin: 10px 0;
+    }
+    .ncap-form-default dd.opt{
+        width: 40%;
+    }
+    .h-notic{
+        color: #FF0000;
+        font-size: 16px;
+        margin: 10px 0;
+        font-weight: bold;
+    }
+</style>
+<load href="__ROOT__/public/plugins/Ueditor/ueditor.config.js"/>
+<load href="__ROOT__/public/plugins/Ueditor/ueditor.all.min.js"/>
+<script type="text/javascript" charset="utf-8" src="__ROOT__/public/plugins/Ueditor/lang/zh-cn/zh-cn.js"></script>
+<script src="__ROOT__/public/static/js/layer/laydate/laydate.js"></script>
+
+
+<body style="background-color: #FFF; overflow: auto;">
+<div id="toolTipLayer" style="position: absolute; z-index: 9999; display: none; visibility: visible; left: 95px; top: 573px;"></div>
+<div id="append_parent"></div>
+<div id="ajaxwaitid"></div>
+<div class="page">
+    <div class="fixed-bar">
+        <div class="item-title"><a class="back" href="javascript:history.back();" title="返回列表"></a>
+            <!--<i class="fa fa-arrow-circle-o-left"></i>-->
+            <div class="subject">
+                <h3>添加爱心助力</h3>
+                <h5>爱心助力信息设置</h5>
+            </div>
+        </div>
+    </div>
+    <p class="bsc-msg">基本信息</p>
+    <form class="form-horizontal" id="handleposition" method="post">
+        <input type="hidden" name="assist_id" value="{$info.id}">
+        <div class="ncap-form-default">
+            <dl class="row">
+                <dt class="tit">
+                    <label><em>*</em>活动名称</label>
+                </dt>
+                <dd class="opt">
+                    <input type="text" name="title" id="title" value="{$info.title}" class="input-txt">
+                </dd>
+            </dl>
+
+
+
+
+            <dl class="row">
+                <dt class="tit">
+                    <label><em>*</em>活动奖励</label>
+                </dt>
+
+                <dd class="opt">
+                    <div class="hpz">
+                        <foreach name="info.assist_reward" item="vo">
+                                <!--奖品1-->
+                                <div class="h-prize" style="display: flex">
+                                    <div >
+                                        <input type="text" name="reward[{$vo.reward_level}][reward_name]"  value="{$vo.reward_name}" placeholder="奖品名称" class="input-txt input-get">
+                                    </div>
+                                    <div >
+                                        <input type="text" name="reward[{$vo.reward_level}][reward_num]"  value="{$vo.reward_num}" placeholder="数量" class="input-txt reward_num" style="width: 40px!important;">
+                                    </div>
+                                    <div class="input-file-show">
+                                        <span class="show">
+                                            <a  target="_blank" class="nyroModal img_a" rel="gal" href="{$vo.reward_img}">
+                                                <i  class="fa fa-picture-o img_i" onmouseover="layer.tips('<img src={$vo.reward_img}>',this,{tips: [1, '#fff']});" onmouseout="layer.closeAll();"></i>
+                                            </a>
+                                        </span>
+                                        <span class="type-file-box">
+                                            <input type="text"  name="reward[{$vo.reward_level}][reward_img]" value="{$vo.reward_img}" class="type-file-text reward_img">
+                                            <input type="button" name="button"  value="选择上传..." class="type-file-button">
+                                            <input class="type-file-file" onClick="upLoadImg(this)" size="30" hidefocus="true" nc_type="change_site_logo" title="点击前方预览图可查看大图，点击按钮选择文件并提交表单后上传生效">
+                                        </span>
+                                    </div>
+                                    <div class="h-delete">删除</div>
+                                </div>
+                        </foreach>
+
+
+                        <if condition="!$info.assist_reward">
+                                <div class="h-prize" style="display: flex">
+                                    <div >
+                                        <input type="text" name="reward[1][reward_name]"  value="" placeholder="1等奖奖品名称" class="input-txt input-get">
+                                    </div>
+                                    <div >
+                                        <input type="text" name="reward[1][reward_num]"  value="" placeholder="数量" class="input-txt reward_num" style="width: 40px!important;">
+                                    </div>
+                                    <div class="input-file-show">
+                                        <span class="show">
+                                            <a  target="_blank" class="nyroModal img_a" rel="gal" href="">
+                                                <i  class="fa fa-picture-o img_i" onmouseover="layer.tips('<img src=}>',this,{tips: [1, '#fff']});" onmouseout="layer.closeAll();"></i>
+                                            </a>
+                                        </span>
+                                        <span class="type-file-box">
+                                            <input type="text"  name="reward[1][reward_img]" value="" class="type-file-text reward_img">
+                                            <input type="button" name="button"  value="选择上传..." class="type-file-button">
+                                            <input class="type-file-file" onClick="upLoadImg(this)" size="30" hidefocus="true" nc_type="change_site_logo" title="点击前方预览图可查看大图，点击按钮选择文件并提交表单后上传生效">
+                                        </span>
+                                    </div>
+                                    <div class="h-delete">删除</div>
+                                </div>
+                       </if>
+                    </div>
+
+                    <div class="add-prize"> + 添加更多奖励</div>
+                    <p class="notic">奖品等级从上至下由大到小依次排列</p>
+                </dd>
+            </dl>
+            <dl class="row">
+                <dt class="tit">
+                    <label><em>*</em>开始时间</label>
+                </dt>
+                <dd class="opt">
+                    <input type="text" id="start_time" name="start_time" value="{:date('Y-m-d H:i:s', $info['start_time'])}"  class="input-txt">
+                </dd>
+            </dl>
+            <dl class="row">
+                <dt class="tit">
+                    <label><em>*</em>结束时间</label>
+                </dt>
+                <dd class="opt">
+                    <input type="text" id="end_time" name="end_time" value="{:date('Y-m-d H:i:s', $info['end_time'])}" class="input-txt">
+                </dd>
+            </dl>
+            <!--<dl class="row">-->
+                <!--<dt class="tit">-->
+                    <!--<label>限制次数</label>-->
+                <!--</dt>-->
+                <!--<dd class="opt">-->
+                    <!--<input style="width: 150px!important;" type="text" name="nums" class="input-txt">-->
+                    <!--<p class="notic">默认每人只能申请助力1次，为0则不限制</p>-->
+                <!--</dd>-->
+            <!--</dl>-->
+            <dl class="row">
+                <dt class="tit">
+                    <label><em>*</em>活动规则</label>
+                </dt>
+                <dd class="opt">
+                    <textarea class="span12 ckeditor" placeholder="请输入活动介绍" id="post_content" name="description" rows="6">{$info.description}</textarea>
+                    <p class="h-notic">请严谨填写助力活动规则，以免引起不必要的纠纷</p>
+                    <p>填写示例：</p>
+                    <p>一、转发邀请好友助力，最高可得xxx；</p>
+                    <p>二、该活动每人仅限参与一次；</p>
+                    <p>三、助力排名第一名获得一等奖，奖品：xxx</p>
+                    <p>助力排名第二名获得二等奖，奖品：xxx</p>
+                </dd>
+            </dl>
+            <dl class="row" style="margin: 0;padding: 0">
+                <dt class="tit">
+                    <label><em>*</em>好友助力可得</label>
+                </dt>
+                <dd class="opt">
+                    <select id="prom_type" name="done_reward">
+                        <option value="0" <if condition="$info[done_reward] eq 1">selected</if>>请选择</option>
+                        <option value="1" <if condition="$info[done_reward] eq 1">selected</if>>奖品</option>
+                        <option value="3" <if condition="$info[done_reward] eq 3">selected</if>>代金券</option>
+                    </select>
+                    <p class="notic">好友助力可得</p>
+                </dd>
+            </dl>
+            <dl class="row" id="expression">
+            </dl>
+                <div class="bot"><a id="submit" class="ncap-btn-big ncap-btn-green">确认提交</a></div>
+        </div>
+    </form>
+</div>
+<script type="text/javascript">
+    var h_value;
+    function upLoadImg(e){
+        //TODO 绑定对应填写项
+        h_value = $(e).parent().parent().parent().find('.input-get').attr('name')
+        GetUploadify(1,'','activity','img_call_back');
+    }
+    function img_call_back(fileurl_tmp) {
+        $('.hpz').find('.input-get').each(function () {
+            if($(this).attr('name') == h_value){
+                $(this).parent().parent().find('.reward_img').val(fileurl_tmp);
+                $(this).parent().parent().find('.img_a').attr('href', fileurl_tmp);
+                $(this).parent().parent().find('.img_i').attr('onmouseover', "layer.tips('<img src="+fileurl_tmp+">',this,{tips: [1, '#fff']});");
+            }
+        })
+    }
+
+    $(function () {
+        $(document).on("click", '#submit', function (e) {
+            var type = parseInt($("#prom_type").val());
+            var expression = $("[name='expression']").val();
+            if (type == 3 && expression == 0){
+                layer.msg('请选择优惠券',{icon:2});return false;
+            }
+            verifyForm();
+        })
+    })
+    var ajax_return_srtatus=1;
+    function verifyForm(){
+        //表单验证
+
+
+        if(ajax_return_srtatus==0){
+            return false;
+        }
+        ajax_return_srtatus=0;
+        $('span.err').hide();
+        $.ajax({
+            type: "POST",
+            url: "{:aurl('assistact://admin/alter')}",
+            data: $('#handleposition').serialize(),
+            async:false,
+            dataType: "json",
+            error: function () {
+                layer.alert("服务器繁忙, 请联系管理员!");
+                ajax_return_srtatus=1
+            },
+            success: function (data) {
+                if (data.status == 1) {
+                    layer.msg(data.msg, {icon: 1, time: 1000}, function(){
+                        location.href = "{:aurl('assistact://admin/index')}";
+                    });
+                } else {
+                    ajax_return_srtatus=1
+                    layer.msg(data.msg, {icon: 2,time: 2000});
+                }
+            }
+        });
+    }
+
+    var url="{:url('Admin/Ueditor/index',array('savePath'=>'activity'))}";
+    var ue = UE.getEditor('post_content',{
+        serverUrl :url,
+        zIndex: 999,
+        initialFrameWidth: "100%", //初化宽度
+        initialFrameHeight: 350, //初化高度
+        focus: false, //初始化时，是否让编辑器获得焦点true或false
+        maximumWords: 99999, removeFormatAttributes: 'class,style,lang,width,height,align,hspace,valign',//允许的最大字符数 'fullscreen',
+        pasteplain:false, //是否默认为纯文本粘贴。false为不使用纯文本粘贴，true为使用纯文本粘贴
+        autoHeightEnabled: true,
+        elementPathEnabled : false
+    });
+
+
+
+
+    $("#prom_type").on("change",function(){
+        var type = parseInt($("#prom_type").val());
+        var coupon_count = $('#coupon_count').val();
+        if (type == 3 && coupon_count <= 0){
+            layer.msg('没有可选择的优惠券',{icon:2});
+        }
+        var expression = '';
+        switch(type){
+            case 0:{
+                expression = '<dt class="tit"><label><em>*</em>虚拟卡券</label></dt>'
+                        + '<dd class="opt"><input type="text" name="expression" pattern="^\\d+$" value="" class="input-txt">'
+                        + '<span class="err" id="err_expression"></span><p class="notic">虚拟卡券</p></dd>';
+                break;
+            }
+            case 3:{
+                expression = '<dt class="tit"><label><em>*</em>代金券</label></dt><dd class="opt"><select name="expression"><option value="0">请选择</option>'
+                        + '<foreach name="coupon_list" item="v"><option value="{$v.id}" <if condition="$v[id] eq $info[expression]">selected</if>>{$v.name}</option></foreach></select>'
+                        + '<span class="err" id="err_expression"></span><p class="notic">请选择代金券</p></dd>';
+                break;
+            }
+
+        }
+        $("#expression").html(expression);
+    });
+
+
+    //商品删除按钮事件
+    $(function () {
+        $(document).on("click", '#delAttr', function (e) {
+            $(this).parent().remove();
+        })
+    })
+    //时间
+    $(document).ready(function(){
+        var startTime = new Date(new Date().getTime() + 3600000)
+        var endTime = new Date(new Date().getTime() + 86400000)
+        laydate.render({
+            elem: '#start_time',//绑定元素
+            theme: 'molv', //主题
+            type:'datetime', //控件选择类型
+            format: 'yyyy-MM-dd HH:mm:ss', //自定义格式
+            calendar: true, //显示公历节日
+            min: '1970-01-01 00:00:00', //最小日期
+            max: '2099-12-31 00:00:00', //最大日期
+            value: startTime,//默认当前时间
+            isInitValue: true,
+            position : 'fixed', //定位方式
+            zIndex: 99999999, //css z-index
+        });
+        laydate.render({
+            elem: '#end_time',//绑定元素
+            theme: 'molv', //主题
+            type:'datetime', //控件选择类型
+            format: 'yyyy-MM-dd HH:mm:ss', //自定义格式
+            calendar: true, //显示公历节日
+            min: '1970-01-01 00:00:00', //最小日期
+            max: '2099-12-31 00:00:00', //最大日期
+            value: endTime,//默认当前时间
+            isInitValue: true,
+            position : 'fixed', //定位方式
+            zIndex: 99999999, //css z-index
+        });
+    })
+    $('.opt').on('click','.h-delete',function () {
+        var hpznums = $(this).parent().parent().children().length-1;
+        for(var i = 1;i <= hpznums;i++){
+            //var value = `reward[${i}][reward_name]`;
+            $(this).parent().parent().children().eq(i).find('.input-get').attr({'name':`reward[${i}][reward_name]`,'placeholder':`${i}等奖奖品名称`});
+            $(this).parent().parent().children().eq(i).find('.reward_num').attr('name',`reward[${i}][reward_num]`);
+            $(this).parent().parent().children().eq(i).find('.reward_img').attr('name',`reward[${i}][reward_img]`);
+        }
+        $(this).parent().remove();
+    })
+    //添加奖品
+    $('.add-prize').on('click',function(){
+        var nums = $(this).parent().children('.hpz').children().length+1
+        if(nums>4){
+            layer.msg('最多添加四种奖品', {icon: 2,time: 2000});
+            return;
+        }
+        var html = `<div class="h-prize" style="display: flex">
+                            <div >
+                                <input type="text" name="reward[${nums}][reward_name]"  value="" placeholder="${nums}等奖奖品名称" class="input-txt input-get">
+                            </div>
+                            <div >
+                                <input type="text" name="reward[${nums}][reward_num]"  value="" placeholder="数量" class="input-txt reward_num" style="width: 40px!important;">
+                            </div>
+                            <div class="input-file-show">
+                                <span class="show">
+                                    <a  target="_blank" class="nyroModal img_a" rel="gal" href="">
+                                        <i  class="fa fa-picture-o img_i" onmouseover="layer.tips('<img src=>',this,{tips: [1, '#fff']});" onmouseout="layer.closeAll();"></i>
+                                    </a>
+                                </span>
+                                <span class="type-file-box">
+                                    <input type="text"  name="reward[${nums}][reward_img]" value="" class="type-file-text reward_img">
+                                    <input type="button" name="button"  value="选择上传..." class="type-file-button">
+                                    <input class="type-file-file" onClick="upLoadImg(this)" size="30" hidefocus="true" nc_type="change_site_logo" title="点击前方预览图可查看大图，点击按钮选择文件并提交表单后上传生效">
+                                </span>
+                            </div>
+                            <div class="h-delete">删除</div>
+                        </div>`;
+        $(this).parent().children('.hpz').append(html)
+    })
+</script>
+</body>
+</html>

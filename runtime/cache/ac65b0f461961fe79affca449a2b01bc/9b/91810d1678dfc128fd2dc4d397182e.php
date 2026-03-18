@@ -1,0 +1,4 @@
+<?php
+//000031104000
+ exit();?>
+[{"goods_id":39,"goods_name":"\u81ea\u52a8\u53d1\u8d27 steam \u5145\u503c\u53615\u7f8e\u5143\u94b1\u5305\u53615\u7f8e\u5200 5\u7f8e\u91d1 \u7edf\u4e00\u901a","shop_price":"100.00"},{"goods_id":142,"goods_name":"\u5e7f\u4e1c\u8054\u901a\u5b98\u65b9\u5145\u503c\u5168\u56fd\u624b\u673a\u8bdd\u8d39100\u5143\u5feb\u901f\u5230\u8d26\u81ea\u52a8\u5145\u503c","shop_price":"99.90"}]

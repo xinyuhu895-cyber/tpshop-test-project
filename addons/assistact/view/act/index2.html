@@ -1,0 +1,675 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>活动</title>
+</head>
+<style>
+    *{
+        margin: 0;
+        padding: 0;
+    }
+    ul,li{
+        list-style: none;
+    }
+    .l-bg{
+        background:linear-gradient(180deg,#e6674e,#d7504b);
+        width: 100%;
+        overflow: hidden;
+        padding-bottom: 0.896rem;
+    }
+    .l-top{
+        width: 100%;
+        height: 8.53rem;
+        margin-top: 1.87rem;
+    }
+    .l-title{
+        width: 11.73rem;
+        height: 2.6rem;
+        margin: 0 auto;
+    }
+    .l-prize{
+        width: 11.73rem;
+        height: 2.13rem;
+        background: url(__STATIC__/img/l-prize.png) no-repeat;
+        background-size: 11.73rem 2.13rem;
+        margin: 0 auto;
+        text-align: center;
+        line-height: 2.133rem;
+        box-sizing: border-box;
+        font-size: 0.768rem;
+        color: #ffffff;
+        font-weight: bold;
+        display: block;
+    }
+    .l-btn{
+        width: 6.4rem;
+        height: 1.92rem;
+        background: url(__STATIC__/img/l-btn.png) no-repeat;
+        background-size: 6.4rem 1.92rem;
+        margin: 0 auto;
+        margin-top: 0.64rem;
+    }
+    .l-announcement{
+        width: 14.72rem;
+        min-height: 20.65rem;
+        background: url(__STATIC__/img/l-act.png) no-repeat;
+        background-size: 14.72rem 20.65rem;
+        margin: 0 auto;
+        margin-top: 0.81rem;
+        overflow: hidden;
+    }
+    .l-time{
+        margin-top: 0.89rem;
+        box-sizing: border-box;
+        padding-left: 2.95rem;
+        padding-top: 0.46rem;
+    }
+    .l-time span{
+        font-size: 0.527rem;
+        color: #ffffff;
+        height: 0.683rem;
+        width: 0.981rem;
+        display: inline-block;
+        text-align: center;
+        float: left;
+        margin: 0 0.832rem;
+    }
+    .l-time span:last-child{
+        margin-left: 0.742rem;;
+    }
+    .l-select{
+        width: 14.72rem;
+        height: 1.621rem;
+        background-color: #ffdd83;
+        margin-top: 1.237rem;
+    }
+    .l-select span{
+        font-size: 0.64rem;
+        text-align: center;
+        display: inline-block;
+        width: 33.33%;
+        height: 100%;
+        line-height: 1.621rem;
+        float: left;
+        font-weight: bold;
+        color: #d1305c;
+    }
+    .zlhy{
+        width: 100%;
+        height: 16.426rem;
+        display: none;
+    }
+    .fr-title{
+        width: 100%;
+        height: 1.706rem;
+        position: relative;
+        background-color: #ffc019;
+    }
+    .fr-title span{
+        font-size: 0.512rem;
+        float: left;
+        width: 25%;
+        line-height: 1.706rem;
+        text-align: center;
+        color: #e11a53;
+    }
+    .zlhy-msg{
+        width: 100%;
+        height: 11.52rem;
+    }
+    .zlhy-msg ul{
+        width: 100%;
+        height: 1.28rem;
+    }
+    .zlhy-msg ul li{
+        float: left;
+        height: 1.28rem;
+        font-size: 0.512rem;
+        width: 25%;
+        text-align: center;
+        line-height: 1.28rem;
+    }
+    .zlhy-msg ul:nth-child(odd){
+        background-color: #ffdd83;
+    }
+    .l-page{
+        width: 100%;
+        height: 2.816rem;
+        text-align: center;
+        font-size: 0.64rem;
+        color: #000000;
+        box-sizing: border-box;
+        padding-top: 0.981rem;
+    }
+    .l-page div{
+        display: inline-block;
+        color: #d64f4a;
+    }
+    .l-page span{
+        display: inline-block;
+        width: 0.9387rem;
+        height: 0.9387rem;
+        border-radius: 0.1rem;
+    }
+    .l-page span.crt{
+        background-color: #d64f4a;
+        color: #ffffff;
+    }
+    .headimg{
+        width: 0.853rem;
+        height: 0.853rem;
+        border-radius: 50%;
+        overflow: hidden;
+        display: inline-block;
+        margin-top: 0.2133rem;
+    }
+    .l-select span.ls-cur{
+        background-color: #d1305c;
+        color: #ffffff;
+    }
+    .role-prize{
+        width: 100%;
+        min-height: 16.21rem;
+        border-radius: .2rem;
+        background-color: #FFC019;
+        padding-bottom: 0.8106rem;
+        display: none;
+    }
+    .rp-title{
+        display: block;
+        width: 100%;
+        height: 1.8346rem;
+        font-size: 0.64rem;
+        text-align: center;
+        line-height: 1.8346rem;
+        color: #e11a53;
+    }
+    .rp-title i{
+        font-weight: bold;
+        font-style: normal;
+    }
+    .prize-list{
+        width: 100%;
+        min-height: 2.986rem;
+    }
+    .prize-title{
+        margin-bottom: 0.106rem;
+        height: 0.512rem;
+    }
+    .prize-title span{
+        font-size: 0.512rem;
+        color: #d1305c;
+        float: left;
+        width: 25%;
+        text-align: center;
+        height: 0.512rem;
+        line-height: 0.512rem;
+    }
+    .prize-list ul{
+        height: 1.706rem;
+        margin-top: 0.32rem;
+    }
+    .prize-list ul li{
+        float: left;
+        width: 25%;
+        height: 1.706rem;
+        text-align: center;
+        font-size: 0.512rem;
+        line-height: 1.706rem;
+    }
+    .prize-list ul li img{
+        width: 1.706rem;
+        height: 1.706rem;
+    }
+    .rp-time{
+        margin-top: 0.3413rem;
+    }
+    .practical-time{
+        text-align: center;
+        font-size: 0.512rem;
+    }
+    .append-role p:last-child{
+        padding-left: 2rem!important;
+    }
+    .rp-role{
+        margin: 0.9173rem 0;
+        height: 0.64rem;
+        line-height: 0.64rem;
+    }
+    .rr-content{
+        text-align: left;
+        padding-left: 0.96rem!important;
+        margin-bottom: 0.512rem!important;
+        background-color: #FFC019!important;
+    }
+    .l-tab-show{
+        display: block;
+    }
+    .l-head{
+        width: 100%;
+        height: 1.87rem;
+        text-align: center;
+        line-height: 1.87rem;
+        font-size: 0.683rem;
+        position: fixed;
+        background-color: #242b34;
+        color: #ffffff;
+    }
+    .l-arrow{
+        position: absolute;
+        width: 0.5rem;
+        height: 0.5rem;
+        box-sizing: border-box;
+        border: 0.042rem solid #ffffff;
+        border-top: none;
+        border-right: none;
+        left: 0.65rem;
+        top: 0.6786rem;
+        transform: rotate(45deg);
+    }
+    .l-circle{
+        position: absolute;
+        right: 0.65rem;
+    }
+    .l-share{
+        width: 100%;
+        height: 28.46rem;
+        background:rgba(0,0,0,.8);
+        position: fixed;
+        z-index: 1000;
+        overflow: hidden;
+        display: none;
+        top: 1.87rem;
+    }
+    .l-share img{
+        width: 12.26rem;
+        margin: 1.109rem auto;
+        display: block;
+    }
+    .l-join{
+        /*display: none;*/
+    }
+    .l-joined{
+        display: none;
+    }
+    .l-public{
+        width: 100%;
+        position: fixed;
+        height: 28.46rem;
+        background:rgba(0,0,0,.8);
+        z-index: 1000;
+        top: 0;
+    }
+    .l-join img{
+        display: block;
+        width: 100%;
+    }
+    .l-join .c-hlep{
+        width: 9.1306rem;
+        height: 2.346rem;
+        position: absolute;
+        top: 14.9rem;
+        left: 3.456rem;
+    }
+    .c-close{
+        width: 1.45rem;
+        height: 1.45rem;
+        top: 22.2rem;
+        left: 7.296rem;
+        position: absolute;
+    }
+    .l-joined img{
+        width: 100%;
+    }
+    .l-joined p{
+        position: absolute;
+        width: 100%;
+        color: #fceb50;
+        top: 13.9rem;
+        text-align: center;
+        font-size: 1.4rem;
+        font-weight: 900;
+        -webkit-text-stroke:2px #af163c;
+    }
+    .get-prize{
+        width: 9rem;
+        height: 2.1rem;
+        top: 17.1rem;
+        left: 3.5rem;
+        position: absolute;
+    }
+
+</style>
+<body>
+    <div class="l-head"><span class="l-arrow"></span><span class="head-title">爱心助力</span><span class="l-circle">· · ·</span></div>
+    <div class="l-join l-public" style="display: none"><span class="c-hlep"></span><span class="c-close"></span><img src="__STATIC__/img/l-join.png" alt=""></div>
+    <div class="l-joined l-public"><p id="l-joined-num"></p><span class="get-prize"></span><span class="c-close"></span><img src="__STATIC__/img/l-joined.png" alt=""></div>
+    <div class="l-bg">
+        <div class="l-share"><img src="__STATIC__/img/l-share.png" alt=""></div>
+        <div class="l-top">
+            <img src="__STATIC__/img/l-head.png" alt="" style="width: 100%;height: 100%;">
+        </div>
+        <div class="l-title">
+            <img src="__STATIC__/img/l-title.png" alt="" style="width: 100%;height: 100%;">
+        </div>
+        <div class="l-prize"></div>
+        <div class="l-btn"></div>
+        <div class="l-announcement">
+            <div class="l-time">
+                <span class="l-day">0</span>
+                <span class="l-hours">00</span>
+                <span class="l-min">00</span>
+            </div>
+            <div class="l-select">
+                <span>- 排行榜 -</span>
+                <span class="ls-cur">- 规则和奖品 -</span>
+                <span>- 助力好友 -</span>
+            </div>
+            <div class="l-tab">
+                <div class="zlhy phb">
+                    <div class="fr-title">
+                        <span>昵称</span>
+                        <span>头像</span>
+                        <span>助力数</span>
+                        <span>名次</span>
+                    </div>
+                    <div class="zlhy-msg">
+
+                    </div>
+                    <div class="l-page">
+                       
+                    </div>
+                </div>
+                <div class="role-prize  l-tab-show">
+                    <p class="rp-title">————&nbsp&nbsp<i>活动奖品</i>&nbsp&nbsp————</p>
+                    <div class="prize-list">
+                        <div class="prize-title">
+                            <span>奖品图片</span>
+                            <span>奖品类别</span>
+                            <span>奖品名称</span>
+                            <span>奖品数量</span>
+                        </div>
+                    </div>
+                    <p class="rp-title rp-time">————&nbsp&nbsp<i>活动时间</i> &nbsp&nbsp————</p>
+                    <p class="practical-time stt-end"></p>
+                    <p class="rp-title rp-role">————&nbsp&nbsp<i>活动规则</i> &nbsp&nbsp————</p>
+                    <div class="append-role">
+                    </div>
+                </div>
+                <div class="zlhy" >
+                <div class="fr-title">
+                    <span>昵称</span>
+                    <span>头像</span>
+                    <span>助力数</span>
+                    <span>名次</span>
+                </div>
+                <div class="zlhy-msg">
+                   
+                </div>
+                <div class="l-page" id="l-page">
+
+                </div>
+            </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+<script src="__STATIC__/js/jquery-3.3.1.js"></script>
+<script>
+    var id = {$id};
+    var sid = {$sid};
+    var current_p;
+    var total_p ;
+    var url;
+
+    //自适应
+    (function() {
+        document.addEventListener('DOMContentLoaded', function() {
+            var body = document.body;
+            var html = document.documentElement;
+            var bodyWidth = body.clientWidth;
+            var fontSize = bodyWidth / 16;
+            html.style.fontSize = fontSize + 'px';
+        });
+    })();
+    $('.l-public,.l-share').css('height',parseInt($(window).height()))
+    $('.l-bg').css('min-height',parseInt($(window).height()));
+    //切换tab
+    $('.l-select').on('click','span',function () {
+        $(this).addClass('ls-cur').siblings().removeClass()
+        $('.l-tab').children().eq($(this).index()).show().siblings().hide()
+
+        switch($(this).index()){
+            case 0:
+                 url = "{:aurl('assistact://act/ranking')}";
+                break;
+            case 2:
+                if(0 == sid){
+                    return;
+                }
+                 url = "{:aurl('assistact://act/friendRank')}";
+                break;
+			default:
+				return;
+				break;
+        }
+
+        ajax_get_data(1);
+    })
+
+
+
+
+    //切换页码
+    $('.l-page').on('click','span',function () {
+        $(this).addClass('crt').siblings().removeClass()
+        ajax_get_data(parseInt($(this).html()))
+    })
+    //我要拿大奖
+    $('.l-share').on('click',function () {
+        $(this).hide();
+        $('body').css('overflow','visible');
+    })
+    $('.c-close').on('click',function () {
+        $(this).parent().hide();
+    })
+
+
+    function ajax_get_data(p){
+        if(p<1 || p>total_p){
+            return;
+        }
+        $.ajax({
+            type:'post',
+            url: url,
+            data:{id:id,sid:sid,page:p},
+            dataType: 'json',
+            success:function (res) {
+
+                if(1 == res.status){
+                    $('.zlhy-msg,.l-page').empty();
+                    var data = res.result.data;
+                    var current_page =  parseInt(res.result.current_page);
+                    var total_page =  parseInt(res.result.last_page);
+                    var _rank =  (parseInt(res.result.current_page)-1)*parseInt(res.result.per_page);
+                    for(var i = 0;i < data.length;i++){
+                        $(`<ul><li>${data[i].nickname}</li><li><div class="headimg"><img src="${data[i].head_pic}" alt="" width="100%" height="100%"></div></li><li>${data[i].num}</li><li>${_rank+i+1}</li></ul>`).appendTo($('.zlhy-msg'))
+                    }
+                    current_p = current_page;
+                    total_p = total_page;
+                    renderPage(current_page,total_page);
+                }else{
+                    alert(res.msg);
+                }
+            }
+        })
+
+    }
+
+    function renderPage(current,total){
+        var _page = '';
+        var _tpage = '';
+        //总数大于4
+        if(total>=4){
+            for(var i=0;i<3;i++){
+                if(current+3<total && total>4){
+                    var _p = (i+1 == current) ? `<span class="crt">${current+i}</span>` :  `<span>${current+i}</span>`;
+                }else if(current+3==total){
+                    var _p = (i+2 == current) ? `<span class="crt">${current+i}</span>` :  `<span>${current+i}</span>`;
+                    _tpage = (total == current) ? `<span class="crt">${total}</span>` :  `<span>${total}</span>`;
+                }else{
+                    var _p = (total+i-2 == current) ? `<span class="crt">${total+i-2}</span>` :  `<span>${total+i-2}</span>`;
+                }
+                _page += _p;
+
+            }
+            if(current+3<total){
+                _page +=`<div>...</div>`;
+            }else if(current+3 == total){
+                _page += _tpage;
+            }else{
+                _page =`<div>...</div>` + _page;
+            }
+        }else{
+            for(var i=0;i<total;i++){
+                var _p = (i+1 == current) ? `<span class="crt">${current+i}</span>` :  `<span>${current+i}</span>`;
+                _page += _p;
+            }
+        }
+
+
+        var page = `<div onclick="goPage(-1)"><<</div>${_page}<div onclick="goPage(1)">>></div>`;
+        $('.l-page').append(page);
+    }
+
+    function goPage(e){
+         var page = current_p + e;
+        ajax_get_data(page);
+    }
+
+    //帮好友助力开始
+    $('.c-hlep').on('click',function () {
+        var that = $(this)
+        $.ajax({
+            type:'post',
+            url:"{:aurl('assistact://act/supply')}",
+            data:{id:id,sid:sid},
+            success:function (res) {
+                res = JSON.parse(res)
+                if(res.status == 1){
+                    $('#l-joined-num').html(res.result);
+                    that.parent().hide();
+                    $('.l-joined').show();
+                }else{
+                    that.parent().hide();
+                    alert(res.msg);
+                }
+            }
+        })
+
+    })
+    //帮好友助力结束
+
+
+    $.ajax({
+        type:'get',
+        url:"{:aurl('assistact://act/info')}",
+        dataType:'json',
+        data:{id:id,sid:sid},
+        success:function(data){
+                if(0 == data.status){
+                    alert(data.msg);
+                    return;
+                }
+
+                //活动倒计时开始
+                var nowTime = new Date().getTime()/1000;
+                var endTime = parseInt(data.result.end_time - nowTime)
+                if(endTime > 0){
+                    var m = parseInt(endTime / 60) % 60;
+                    var h = parseInt(endTime / 3600) % 24;
+                    var d = parseInt(endTime / (3600 * 24));
+                    setInterval(function () {
+                        $('.l-day').html(d)
+                        $('.l-hours').html((h<10)? '0'+h:h);
+                        $('.l-min').html((m<10)? '0'+m:m)
+                    },1000)
+                }
+
+
+                //活动倒计时结束
+
+                //顶部标题开始
+                $('title').html(data.result.title)
+                $('.head-title').html(data.result.title)
+                $('.append-role').append(data.result.description)
+                $('.append-role').children().each(function () {
+                    $(this).addClass('practical-time rr-content')
+                })
+                //顶部标题结束
+
+                //奖品列表开始
+                var html = ''
+                for(var prizeList of data.result.assist_reward){
+                    html += `<ul>
+                                <li><img src="${prizeList.reward_img}"></li>
+                                <li>${prizeList.reward_level}等奖</li>
+                                <li>${prizeList.reward_name}</li>
+                                <li>${prizeList.reward_num}</li>
+                             </ul>`;
+                }
+                $('.prize-list').append(html);
+                $('.l-prize').html(data.result.assist_reward[0].reward_name);
+                html = '';
+                //奖品列表结束
+
+                //开始和结束开始
+                var startTime = new Date(data.result.start_time*1000);
+                startTime = startTime.getFullYear() + '年' + (startTime.getMonth()+1) + '月' + startTime.getDate() + '日 ' + startTime.getHours() + ':' + (startTime.getMinutes() < 10?'0'+startTime.getMinutes():startTime.getMinutes());
+                var endTime = new Date(data.result.end_time*1000);
+                endTime = endTime.getFullYear() + '年' + (endTime.getMonth()+1) + '月' + endTime.getDate() + '日 ' + endTime.getHours() + ':' + (endTime.getMinutes() < 10?'0'+endTime.getMinutes():endTime.getMinutes());
+                html = `<p class="practical-time">${startTime} - ${endTime}</p>`;
+                $('.stt-end').html(html)
+                //开始和结束结束
+
+                //是否助力
+                if(1 !== data.result.is_supply){
+                    $('.l-join').show();
+                }
+                //是否获奖
+                if(0 != data.result.is_award && (typeof data.result.is_award == 'object')){
+                    //$('.congratulation img').attr('src',data.result.is_award.reward_img).attr('alt',data.result.is_award.reward_name)
+                    $('.congratulation').show();
+                }
+            }
+        });
+
+
+    //点击发起助力开始
+    $('.l-btn,.get-prize').on('click',function () {
+        $('.l-joined').hide();
+       
+        $.ajax({
+            type:'post',
+            url:"{:aurl('assistact://act/promAct')}",
+            data:{id:id},
+            success:function (res) {
+                res = JSON.parse(res)
+                if(res.status == 1){
+                
+                    window.history.pushState(null,null,res.result)
+					$('.l-share').show();
+        			$('body').css('overflow','hidden');
+                }else {
+                    alert(res.msg);
+                }
+            }
+        })
+    })
+    //点击发起好友助力结束
+</script>
