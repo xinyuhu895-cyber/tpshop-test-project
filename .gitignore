@@ -3,10 +3,39 @@
 
 # PHP / Composer 依赖
 vendor/
+composer.lock
 
 # ThinkPHP 缓存
 runtime/
+log/
+*.log
 
 # 本地改动要忽略的
 extend/
 thinkphp/.gitignore
+
+# IDE / 编辑器
+.vscode/
+.idea/
+
+# 临时文件
+*.swp
+*.bak
+*.tmp
+*.old
+
+# Node.js（如果有前端依赖）
+node_modules/
+npm-debug.log
+yarn-error.log
+
+# 打包 / 部署文件
+dist/
+build/
+*.zip
+*.tar.gz
+
+# 本地数据库 / 环境文件
+*.sql
+*.sqlite
+*.env
