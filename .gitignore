@@ -1,2 +1,12 @@
-test_tool/.DS_Store
-test_tool/.DS_Store
+# macOS 系统文件
+.DS_Store
+
+# PHP / Composer 依赖
+vendor/
+
+# ThinkPHP 缓存
+runtime/
+
+# 本地改动要忽略的
+extend/
+thinkphp/.gitignore
