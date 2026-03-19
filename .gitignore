@@ -29,7 +29,7 @@ node_modules/
 npm-debug.log
 yarn-error.log
 
-# 打包 / 部署文件
+# 打包 / 构建文件
 dist/
 build/
 *.zip
@@ -39,3 +39,7 @@ build/
 *.sql
 *.sqlite
 *.env
+
+# 忽略不想跟踪的子目录和文件
+extend/
+thinkphp/.gitignore
